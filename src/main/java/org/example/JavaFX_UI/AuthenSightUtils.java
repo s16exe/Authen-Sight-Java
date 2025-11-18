@@ -6,6 +6,7 @@ import org.opencv.core.Mat;
 import javafx.embed.swing.SwingFXUtils;
 
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.awt.image.DataBufferInt;
@@ -23,37 +24,26 @@ public class AuthenSightUtils {
         return dot / (Math.sqrt(normA) * Math.sqrt(normB));
     }
 
+    public static BufferedImage convertTo3ByteBGR(BufferedImage image) {
+        if (image.getType() == BufferedImage.TYPE_3BYTE_BGR) {
+            return image;
+        }
+        BufferedImage convertedImg = new BufferedImage(image.getWidth(), image.getHeight(), BufferedImage.TYPE_3BYTE_BGR);
+        Graphics2D g2d = convertedImg.createGraphics();
+        g2d.drawImage(image, 0, 0, null);
+        g2d.dispose();
+        return convertedImg;
+    }
+
     public Mat convertFxImageToMat(Image fxImage) {
         BufferedImage bImage = SwingFXUtils.fromFXImage(fxImage, null);
-        Mat mat;
-
-        if (bImage.getType() == BufferedImage.TYPE_3BYTE_BGR) {
-            // Common byte-based BGR image
-            byte[] pixels = ((DataBufferByte) bImage.getRaster().getDataBuffer()).getData();
-            mat = new Mat(bImage.getHeight(), bImage.getWidth(), CvType.CV_8UC3);
-            mat.put(0, 0, pixels);
-        } else if (bImage.getType() == BufferedImage.TYPE_INT_RGB || bImage.getType() == BufferedImage.TYPE_INT_ARGB) {
-            // Integer-based RGB or ARGB image
-            int[] pixels = ((DataBufferInt) bImage.getRaster().getDataBuffer()).getData();
-            mat = new Mat(bImage.getHeight(), bImage.getWidth(), CvType.CV_8UC3);
-            // Convert from int RGB to byte BGR for Mat
-            byte[] matPixels = new byte[bImage.getHeight() * bImage.getWidth() * 3];
-            for (int i = 0; i < pixels.length; i++) {
-                int argb = pixels[i];
-                int r = (argb >> 16) & 0xFF;
-                int g = (argb >> 8) & 0xFF;
-                int b = argb & 0xFF;
-
-                matPixels[i * 3] = (byte) b;       // OpenCV uses BGR order
-                matPixels[i * 3 + 1] = (byte) g;
-                matPixels[i * 3 + 2] = (byte) r;
-            }
-            mat.put(0, 0, matPixels);
-        } else {
-            throw new IllegalArgumentException("Unsupported BufferedImage type: " + bImage.getType());
-        }
+        bImage = convertTo3ByteBGR(bImage);
+        byte[] pixels = ((DataBufferByte) bImage.getRaster().getDataBuffer()).getData();
+        Mat mat = new Mat(bImage.getHeight(), bImage.getWidth(), CvType.CV_8UC3);
+        mat.put(0, 0, pixels);
         return mat;
     }
+
 
 
 }

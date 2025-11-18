@@ -82,16 +82,16 @@ public class FaceCompare extends Application {
 
             float[] emb1 = extractor.getEmbedding(mat1);
             float[] emb2 = extractor.getEmbedding(mat2);
-            double similarity = authenSightUtils.cosineSimilarity(emb1, emb2);
+            double similarity = 100.0 * authenSightUtils.cosineSimilarity(emb1, emb2);
             similarityLabel.setText(String.format("Similarity: %.4f", similarity));
 
 //        double similarity = FaceSimilarityCalculator.cosineSimilarity(emb1, emb2);
 //        System.out.println("Cosine Similarity: " + similarity);
 
             if (similarity > 0.6) {
-                similarityLabel.setText(String.format("✅ Same person  -> Similarity: %.4f", similarity));
+                similarityLabel.setText(String.format("✅ Same person  -> Similarity:%.2f %%", similarity));
             } else {
-                similarityLabel.setText(String.format("❌ Different person  -> Similarity: %.4f", similarity));
+                similarityLabel.setText(String.format("❌ Different person  -> Similarity:%.2f %%", similarity));
             }
         } catch (Exception ex) {
             similarityLabel.setText("Error: " + ex.getMessage());
