@@ -1,0 +1,6 @@
+download w600k_r50.onnx from online huggingface
+
+download sdk from https://gluonhq.com/products/javafx/
+
+Add below to VM Options for running Application
+--module-path path/to/javafx-sdk/lib --add-modules javafx.controls, javafx.fxml

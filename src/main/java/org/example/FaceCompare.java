@@ -88,7 +88,7 @@ public class FaceCompare extends Application {
 //        double similarity = FaceSimilarityCalculator.cosineSimilarity(emb1, emb2);
 //        System.out.println("Cosine Similarity: " + similarity);
 
-            if (similarity > 0.6) {
+            if (similarity > 60) {
                 similarityLabel.setText(String.format("✅ Same person  -> Similarity:%.2f %%", similarity));
             } else {
                 similarityLabel.setText(String.format("❌ Different person  -> Similarity:%.2f %%", similarity));
