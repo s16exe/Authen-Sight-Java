@@ -1,4 +1,4 @@
-package authen_sight_java.Util;
+package org.example.JavaFX_UI;
 
 import javafx.scene.image.Image;
 import org.opencv.core.CvType;

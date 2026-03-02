@@ -1,4 +1,4 @@
-package authen_sight_java.Util;
+package org.example;
 
 import ai.onnxruntime.*;
 
@@ -10,7 +10,7 @@ import org.opencv.objdetect.CascadeClassifier;
 import java.nio.FloatBuffer;
 import java.util.Collections;
 
-public class FaceEmbeddingExtractor {
+class FaceEmbeddingExtractor {
 
     private CascadeClassifier faceDetector;
     private OrtSession session;
