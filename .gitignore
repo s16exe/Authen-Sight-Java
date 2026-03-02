@@ -5,17 +5,9 @@ target/
 .kotlin
 !**/src/main/resources/w600k_r50.onnx
 
-<<<<<<< HEAD
 javafx_sdk/
 ### IntelliJ IDEA ##
 .idea/
-=======
-### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
->>>>>>> parent of cfa140f (path updated)
 *.iws
 *.iml
 *.ipr
