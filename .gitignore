@@ -5,11 +5,9 @@ target/
 .kotlin
 !**/src/main/resources/w600k_r50.onnx
 
-### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
+javafx_sdk/
+### IntelliJ IDEA ##
+.idea/
 *.iws
 *.iml
 *.ipr

@@ -1,4 +1,4 @@
-package org.example.JavaFX_UI;
+package authen_sight_java.JavaFX_UI;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;

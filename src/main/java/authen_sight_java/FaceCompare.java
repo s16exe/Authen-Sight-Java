@@ -1,4 +1,4 @@
-package org.example;
+package authen_sight_java;
 
 
 import javafx.application.Application;
@@ -7,14 +7,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
-import org.example.JavaFX_UI.AuthenSightUtils;
-import org.example.JavaFX_UI.ImageLoader;
-import org.example.JavaFX_UI.UIBuilder;
+import authen_sight_java.Util.AuthenSightUtils;
+import authen_sight_java.Util.ImageLoader;
+import authen_sight_java.JavaFX_UI.UIBuilder;
+import authen_sight_java.Util.FaceEmbeddingExtractor;
 import org.opencv.core.*;
-import ai.onnxruntime.*;
-
-
-
 
 
 public class FaceCompare extends Application {
@@ -24,13 +21,19 @@ public class FaceCompare extends Application {
         nu.pattern.OpenCV.loadLocally();
     }
 
-    private ImageView imageView1 = new ImageView();
-    private ImageView imageView2 = new ImageView();
-    private Label similarityLabel = new Label("Similarity: N/A");
+    private final ImageView imageView1;
+    private final ImageView imageView2;
+    private final Label similarityLabel = new Label("Similarity: N/A");
 
-    private ImageLoader imageLoader = new ImageLoader();
-    private AuthenSightUtils authenSightUtils = new AuthenSightUtils();
+    private final ImageLoader imageLoader;
+    private final AuthenSightUtils authenSightUtils = new AuthenSightUtils();
     private FaceEmbeddingExtractor extractor;
+
+    public FaceCompare() {
+        imageLoader = new ImageLoader();
+        imageView2 = new ImageView();
+        imageView1 = new ImageView();
+    }
 
 
     @Override
@@ -83,10 +86,10 @@ public class FaceCompare extends Application {
             float[] emb1 = extractor.getEmbedding(mat1);
             float[] emb2 = extractor.getEmbedding(mat2);
             double similarity = 100.0 * authenSightUtils.cosineSimilarity(emb1, emb2);
+
+
             similarityLabel.setText(String.format("Similarity: %.4f", similarity));
 
-//        double similarity = FaceSimilarityCalculator.cosineSimilarity(emb1, emb2);
-//        System.out.println("Cosine Similarity: " + similarity);
 
             if (similarity > 60) {
                 similarityLabel.setText(String.format("✅ Same person  -> Similarity:%.2f %%", similarity));
@@ -95,10 +98,7 @@ public class FaceCompare extends Application {
             }
         } catch (Exception ex) {
             similarityLabel.setText("Error: " + ex.getMessage());
-            ex.printStackTrace();
         }
-
-
     }
 
     public static void main(String[] args) {
