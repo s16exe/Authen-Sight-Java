@@ -5,7 +5,13 @@
 ---
 ### Sample Screen Shots
 
-[Project Screenshot](sample-screenshots/screenshot-1.jpeg)[](sample-screenshots/screenshot-2.jpeg)
+<div align="center">
+  <img src="sample-screenshots/screenshot-1.jpeg" width="700"/>
+</div>
+
+<div align="center">
+  <img src="sample-screenshots/screenshot-2.jpeg" width="700"/>
+</div>  
 
 ## 📋 Prerequisites
 
